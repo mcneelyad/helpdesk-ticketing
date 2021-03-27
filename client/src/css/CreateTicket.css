@@ -1,0 +1,33 @@
+.ticket-form {
+    margin: auto;
+    width: 60%;
+}
+
+.form-label {
+    width: 100%;
+}
+
+.form-input {
+    border-radius: 5px;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.priority-input {
+    margin-left: 0.75rem;
+}
+
+.form-submit {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #1E90FF;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}

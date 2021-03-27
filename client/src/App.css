@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navLinks ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.navLinks li {
+    float: left;
+}
+
+.navLinks li a {
+    display: block;
+    padding: 8px;
+    background-color: #dddddd;
+}

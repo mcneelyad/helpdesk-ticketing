@@ -1,0 +1,30 @@
+.title {
+    text-align: center;
+}
+
+.ticket-list {
+    margin: auto;
+    width: 90%;
+    border-collapse: collapse;
+}
+
+.ticket-list th {
+    background-color: #1E90FF;
+    color: white;
+}
+
+.ticket-list, td, th {
+    border: 1px solid black;
+}
+
+.ticket-list tr:hover {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 8px;
+}
+
+td {
+    text-align: center;
+}
