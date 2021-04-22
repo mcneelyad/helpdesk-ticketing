@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import axios from 'axios';
 
@@ -17,32 +17,38 @@ export default function TicketList(props) {
     }, [])
 
     return (
-        <div>
+        <div className="ticketList-page">
             <h1 className="title">Open Tickets</h1>
-            <br/>
+            <br />
             <table className="ticket-list">
-                <tr>
-                    <th>Date Created</th>
-                    <th>Customer</th>
-                    <th>Customer Contact</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Priority</th>
-                    <th>Technician Name</th>
-                </tr>
-                {tickets.map((ticket, index) => {
-                    return <tr>
-                                <td>{ticket.date_created}</td>
-                                <td>{ticket.customer}</td>
-                                <td>{ticket.customer_contact}</td>
-                                <td>{ticket.title}</td>
-                                <td>{ticket.description}</td>
-                                <td>{ticket.category}</td>
-                                <td>{ticket.priority}</td>
-                                <td>{ticket.technician_name}</td>
-                            </tr>
-                })}
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Date Created</th>
+                        <th>Title</th>
+                        <th>Customer</th>
+                        <th>Customer Contact</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Technician Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tickets.map((ticket, index) => {
+                        return <tr key={ticket._id}>
+                            <td>{ticket.status}</td>
+                            <td>{moment(ticket.date_created).format('M-D-YYYY h:mma')}</td>
+                            <td>{ticket.title}</td>
+                            <td>{ticket.customer}</td>
+                            <td>{ticket.customer_contact}</td>
+                            <td>{ticket.description}</td>
+                            <td>{ticket.category}</td>
+                            <td>{ticket.priority}</td>
+                            <td>{ticket.technician_name}</td>
+                        </tr>
+                    })}
+                </tbody>
             </table>
 
             {/* <p>{JSON.stringify(tickets)}</p> */}

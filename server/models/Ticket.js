@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const TicketSchema = new mongoose.Schema({
+    status: {
+        type: String,
+        default: 'Open'
+    },
     title: String,
     customer: String,
     customer_contact: String,

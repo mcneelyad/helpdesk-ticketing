@@ -9,12 +9,14 @@ const Navbar = () => {
             <div className="container">
                 <div className='navbar-menu'>
                     <div className="navbar-start">
-                        <NavLink className="navbar-item" to="/tickets">
+                        <NavLink className="navbar-item" to="/dashboard">
                             Helpdesk Tickets
+                        </NavLink>
+                        <NavLink className="navbar-item" to="/tickets">
+                            Ticket List
                         </NavLink>
                         <NavLink
                             className="navbar-item"
-                            activeClassName="is-active"
                             to="/submit">Submit a Ticket</NavLink>
                     </div>
 

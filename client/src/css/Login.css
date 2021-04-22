@@ -1,70 +1,60 @@
-html, body {
-    padding: 0;
-    margin: 0;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  .joinOuterContainer {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    height: 50vh;
-    align-items: center;
-  }
-  
-  .joinInnerContainer {
-    width: 20%;
-  }
-  
-  .login-input {
+.joinOuterContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 50vh;
+  align-items: center;
+}
+
+.joinInnerContainer {
+  margin-top: 40px;
+  width: 20%;
+}
+
+.login-input {
+  border-radius: 5px;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.heading {
+  color: black;
+  font-size: 2.5em;
+  padding-bottom: 10px;
+  border-bottom: 2px solid white;
+}
+
+.signup-link {
+  text-align: center;
+}
+
+.login-btn {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #1E90FF;
+    padding: 20px;
     border-radius: 5px;
-    padding: 15px 20px;
+    display: inline-block;
+    border: none;
     width: 100%;
-  }
-  
-  .heading {
-    color: black;
-    font-size: 2.5em;
-    padding-bottom: 10px;
-    border-bottom: 2px solid white;
-  }
-  
-  .login-btn {
-      color: #fff !important;
-      text-transform: uppercase;
-      text-decoration: none;
-      background: #1E90FF;
-      padding: 20px;
-      border-radius: 5px;
-      display: inline-block;
-      border: none;
-      width: 100%;
-      border-radius: 10px;
+    border-radius: 10px;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .joinOuterContainer {
+    height: 100%;
   }
 
-  .login-btn:hover {
-    cursor: pointer;
+  .joinInnerContainer {
+    width: 90%;
   }
-  
-  /* .mt-20 {
-    margin-top: 20px;
-  } */
-  
-  @media (min-width: 320px) and (max-width: 480px) {
-    .joinOuterContainer {
-      height: 100%;
-    }
-  
-    .joinInnerContainer {
-      width: 90%;
-    }
-  
-  
-  }
-  
-  .login-btn:focus {
-    outline: 0;
-  }
+}
+
+.login-btn:focus {
+  outline: 0;
+}
