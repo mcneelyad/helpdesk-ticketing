@@ -1,0 +1,89 @@
+.dashboard-page {
+    margin-top: 40px;
+    width: 100%;
+    /* height: 100vh; */
+    padding: 10px;
+}
+
+.panels > div {
+    /* Add a black border around each panel for debugging */
+    border: 1px solid black;
+}
+
+.panels {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 225px auto auto;
+    grid-template-rows: auto auto;
+}
+
+.panel-techList {
+    grid-row: span 2;
+    /* height: 70vh; */
+}
+
+.panel-techList h3 {
+  text-align: center;
+}
+
+.panel-techList ul li {
+  padding: 0.5rem;
+  list-style-type: none;
+}
+
+.panel-openTickets {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+#open_ticket_list {
+  margin: auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#open_ticket_list th {
+  background-color: #1E90FF;
+  color: white;
+}
+
+#open_ticket_list, td, th {
+  border: 1px solid black;
+}
+
+#open_ticket_list tr:hover {
+  background-color: #f2f2f2;
+}
+
+th, td {
+  padding: 8px;
+}
+
+td {
+  text-align: center;
+}
+
+.panel-tickets {
+    grid-column: span 2;
+}
+
+@media (max-width: 750px) {
+    .panels {
+      grid-template-columns: 225px auto;
+      grid-template-rows: auto auto auto;
+    }
+    .panel-tickets {
+      grid-column: span 2;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .panels {
+      grid-template-columns: auto;
+    }
+    .panel-tickets {
+      grid-column: span 1;
+    }
+  }
