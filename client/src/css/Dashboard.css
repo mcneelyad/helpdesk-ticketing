@@ -69,6 +69,10 @@ td {
     grid-column: span 2;
 }
 
+.panel-ticketsByTechnician div {
+  margin: auto;
+}
+
 @media (max-width: 750px) {
     .panels {
       grid-template-columns: 225px auto;

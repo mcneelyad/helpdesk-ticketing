@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
+import { Chart } from "react-google-charts";
+
 import '../css/Dashboard.css';
 
 export default function Dashboard() {
@@ -41,9 +43,25 @@ export default function Dashboard() {
                         <h4>Open Tickets</h4>
                     </div>
                 </div>
-                <div className="panel-ticketsByTechnician"></div>
+                <div className="panel-ticketsByTechnician">
+                    <Chart
+                        width={'500px'}
+                        height={'300px'}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                            ['Task', 'Hours per Day'],
+                            ['Work', 11],
+                            ['Eat', 2]
+                        ]}
+                        options={{
+                            title: 'My Daily Activities',
+                        }}
+                        rootProps={{ 'data-testid': '1' }}
+                    />
+                </div>
                 <div className="panel-tickets">
-                    <h3 style={{textAlign: `center`,padding: `0.5rem`}}>Your Assigned Tickets</h3>
+                    <h3 style={{ textAlign: `center`, padding: `0.5rem` }}>Your Assigned Tickets</h3>
                     <table id="open_ticket_list">
                         <thead>
                             <tr>
