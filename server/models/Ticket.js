@@ -12,6 +12,7 @@ const TicketSchema = new mongoose.Schema({
     category: String,
     priority: String,
     technician_name: String,
+    technician_id: String,
     technnician_notes: String,
     date_created: {
         type: Date,

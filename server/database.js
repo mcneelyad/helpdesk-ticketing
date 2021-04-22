@@ -39,8 +39,8 @@ function getOpenTicketCount() {
     return Ticket.countDocuments({status: 'Open'});
 }
 
-function getTicketById(id) {
-    return Ticket.find({_id:id})
+function getTicketByTechnicianId(techId) {
+    return Ticket.find({technician_id: techId});
 }
 
 // TECHNICIAN QUERIES ------------------------
@@ -49,4 +49,4 @@ function getAllTechnicians() {
     return Technician.find({});
 }
 
-module.exports = { getAllTickets, createTicket, getAllOpenTickets, getOpenTicketCount, getAllTechnicians };
+module.exports = { getAllTickets, createTicket, getAllOpenTickets, getOpenTicketCount, getAllTechnicians, getTicketByTechnicianId };
