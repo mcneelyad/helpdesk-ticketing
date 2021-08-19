@@ -13,11 +13,12 @@ const TicketSchema = new mongoose.Schema({
     priority: String,
     technician_name: String,
     technician_id: String,
-    technnician_notes: String,
+    technician_notes: String,
     date_created: {
         type: Date,
         default: new Date()
-    }
+    },
+    resolution: String,
 });
 
 const Ticket = mongoose.model('Ticket', TicketSchema);

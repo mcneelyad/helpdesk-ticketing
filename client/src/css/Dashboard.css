@@ -1,13 +1,15 @@
 .dashboard-page {
-    margin-top: 40px;
     width: 100%;
-    /* height: 100vh; */
-    padding: 10px;
+}
+
+.title {
+  background-color: white;
 }
 
 .panels > div {
-    /* Add a black border around each panel for debugging */
     border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .panels {
@@ -15,11 +17,13 @@
     grid-gap: 10px;
     grid-template-columns: 225px auto auto;
     grid-template-rows: auto auto;
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .panel-techList {
     grid-row: span 2;
-    /* height: 70vh; */
 }
 
 .panel-techList h3 {
@@ -29,6 +33,15 @@
 .panel-techList ul li {
   padding: 0.5rem;
   list-style-type: none;
+  background-color: #2a9d8f;
+  margin: 5px;
+  border-radius: 5px;
+  color: white;
+}
+
+.panel-techList ul li:hover {
+  background-color: #e9c46a;
+  color: black;
 }
 
 .panel-openTickets {
@@ -45,7 +58,7 @@
 }
 
 #open_ticket_list th {
-  background-color: #1E90FF;
+  background-color: var(--main);
   color: white;
 }
 
@@ -73,6 +86,11 @@ td {
   margin: auto;
 }
 
+#technicianLink {
+  text-decoration: none;
+  color: white;
+}
+
 @media (max-width: 750px) {
     .panels {
       grid-template-columns: 225px auto;
@@ -89,5 +107,11 @@ td {
     }
     .panel-tickets {
       grid-column: span 1;
+    }
+  }
+
+  @media (max-width: 490px) {
+    .navbar-start {
+      display: grid;
     }
   }

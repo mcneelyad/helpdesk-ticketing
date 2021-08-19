@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-
 import axios from 'axios';
 
-import '../css/TicketList.css'
+import Navbar from '../components/Navbar';
+import Ticket from '../components/Ticket';
+
+import '../css/TicketList.css';
+import { Link } from 'react-router-dom';
 
 export default function TicketList(props) {
     const [tickets, setTickets] = useState([]);
@@ -12,9 +14,16 @@ export default function TicketList(props) {
         axios.get("http://localhost:5000/tickets")
             .then((res) => {
                 setTickets(res.data);
-                console.log(res.data);
             });
     }, [])
+
+    const onEditClick = (ticket) => {
+        <Link to={"/edit/"+ticket._id }/>
+    }
+
+    const onDeleteClick = (ticket) => {
+        alert("Not implemented yet");
+    }
 
     return (
         <div className="ticketList-page">
@@ -27,31 +36,18 @@ export default function TicketList(props) {
                         <th>Date Created</th>
                         <th>Title</th>
                         <th>Customer</th>
-                        <th>Customer Contact</th>
                         <th>Description</th>
                         <th>Category</th>
                         <th>Priority</th>
-                        <th>Technician Name</th>
+                        <th>Edit / Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {tickets.map((ticket, index) => {
-                        return <tr key={ticket._id}>
-                            <td>{ticket.status}</td>
-                            <td>{moment(ticket.date_created).format('M-D-YYYY h:mma')}</td>
-                            <td>{ticket.title}</td>
-                            <td>{ticket.customer}</td>
-                            <td>{ticket.customer_contact}</td>
-                            <td>{ticket.description}</td>
-                            <td>{ticket.category}</td>
-                            <td>{ticket.priority}</td>
-                            <td>{ticket.technician_name}</td>
-                        </tr>
+                        return <Ticket ticket={ticket} onEditClick={onEditClick} onDeleteClick={onDeleteClick} />
                     })}
                 </tbody>
             </table>
-
-            {/* <p>{JSON.stringify(tickets)}</p> */}
         </div>
     );
 }

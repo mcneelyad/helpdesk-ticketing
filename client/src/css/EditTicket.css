@@ -1,0 +1,48 @@
+.editTicket {
+    margin: auto;
+    width: 80%;
+    margin-top: 3rem;
+    height: 100vh;
+}
+
+hr {
+    margin: 15px;
+}
+
+#technicianNotes {
+    width: 100%;
+    padding: 10px;
+}
+
+#tech_select {
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+#resolution {
+    width: 100%;
+    padding: 10px;
+}
+
+select {
+    margin-left: 15px;
+    width: 150px;
+    padding: 5px 35px 5px 15px;
+    font-size: 16px;
+    border: 1px solid #CCC;
+    height: 34px;
+    appearance: none;
+}
+
+button[type="submit"] {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--main);
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+}

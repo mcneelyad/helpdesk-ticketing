@@ -1,20 +1,21 @@
-.createTicket-page {
-    margin-top: 40px;
-}
-
 .ticket-form {
     margin: auto;
-    width: 60%;
+    width: 75%;
+    background-color: white;
+    padding: 10px;
 }
 
 .form-label {
     width: 100%;
+    background-color: white;
 }
 
 .form-input {
     border-radius: 5px;
+    background-color: white;
     padding: 15px 20px;
     width: 100%;
+    border: 1px solid black;
 }
 
 .priority-input {
@@ -25,7 +26,7 @@
     color: #fff !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: #1E90FF;
+    background: var(--main);
     padding: 20px;
     border-radius: 5px;
     display: inline-block;
@@ -34,4 +35,14 @@
     border-radius: 10px;
     margin-bottom: 1rem;
     cursor: pointer;
+}
+
+#customer_info {
+    display: flex;
+} 
+
+#customer_name, #customer_contact {
+    width:50%;
+    margin-left: 5px;
+    margin-right: 5px;
 }

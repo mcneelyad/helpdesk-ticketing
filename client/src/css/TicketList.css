@@ -1,8 +1,9 @@
 .ticketList-page {
-    margin-top: 40px;
+    height: 100vh;
 }
 
 .title {
+    margin-top: 15px;
     text-align: center;
 }
 
@@ -10,10 +11,11 @@
     margin: auto;
     width: 90%;
     border-collapse: collapse;
+    background-color: white;
 }
 
 .ticket-list th {
-    background-color: #1E90FF;
+    background-color: var(--main);
     color: white;
 }
 
@@ -33,21 +35,33 @@ td {
     text-align: center;
 }
 
-.low {
-    background-color: #80ff00;
+.Low {
+    background-color: lightgreen;
 }
 
-.medium {
+.Medium {
     color: white;
     background-color: #ff8000;
 }
 
-.high {
+.High {
     color: white;
-    background-color: #ff0000;
+    background-color: red;
 }
 
-.urgent {
+.Urgent {
     color: white;
-    background-color: #8B0000;
+    background-color: rebeccapurple;
+}
+
+.text-truncate {
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    max-width: 1px;
+}
+
+.edit_delete_buttons button {
+    margin: 5px;
+    padding: 0.2rem;
 }

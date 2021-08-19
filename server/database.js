@@ -43,10 +43,22 @@ function getTicketByTechnicianId(techId) {
     return Ticket.find({technician_id: techId});
 }
 
+function getTicketById(id) {
+    return Ticket.find({_id: id});
+}
+
 // TECHNICIAN QUERIES ------------------------
 
 function getAllTechnicians() {
     return Technician.find({});
 }
 
-module.exports = { getAllTickets, createTicket, getAllOpenTickets, getOpenTicketCount, getAllTechnicians, getTicketByTechnicianId };
+module.exports = { 
+    getAllTickets, 
+    createTicket, 
+    getAllOpenTickets, 
+    getOpenTicketCount, 
+    getAllTechnicians, 
+    getTicketByTechnicianId,
+    getTicketById
+};

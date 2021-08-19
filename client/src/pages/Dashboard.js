@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-
 import { Chart } from "react-google-charts";
 
 import '../css/Dashboard.css';
@@ -10,6 +9,8 @@ export default function Dashboard() {
     const [statistics, setStatistics] = useState({});
     const [openTickets, setOpenTickets] = useState([]);
     const [technicians, setTechnicians] = useState([]);
+    const [ticketsByTech, setTicketsByTech] = useState({});
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:5000/dashboard")
@@ -19,15 +20,21 @@ export default function Dashboard() {
                 setStatistics(res.data);
                 setOpenTickets(res.data.openTickets);
                 setTechnicians(res.data.technicians);
+                setTicketsByTech(res.data.ticketsByTech);
             });
     }, [])
+
+    const showModal = e => {
+        setIsModalOpen(true);
+    }
 
     return (
         <div className="dashboard-page">
             <h1 className="title">Dashboard</h1><br />
             <div className="panels">
                 <div className="panel-techList">
-                    <h3>Technician List</h3>
+                    <h3>Technician List</h3><br />
+                    <button onClick={(e) => this.showModal()}>Create a Technician</button>
                     <hr />
                     <ul>
                         {technicians.map((tech) => {
@@ -50,12 +57,12 @@ export default function Dashboard() {
                         chartType="PieChart"
                         loader={<div>Loading Chart</div>}
                         data={[
-                            ['Task', 'Hours per Day'],
-                            ['Work', 11],
-                            ['Eat', 2]
+                            ['Technician', 'Open Tickets'],
+                            ['Alex D McNeely', 2],
+                            ['Jordan D Bolick (McNeely)', 1]
                         ]}
                         options={{
-                            title: 'My Daily Activities',
+                            title: 'Tickets By Technician',
                         }}
                         rootProps={{ 'data-testid': '1' }}
                     />
@@ -70,7 +77,6 @@ export default function Dashboard() {
                                 <th>Title</th>
                                 <th>Category</th>
                                 <th>Priority</th>
-                                <th>Technician Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,8 +86,7 @@ export default function Dashboard() {
                                     <td>{moment(ticket["date_created"]).format('MM-D-YYYY h:mma')}</td>
                                     <td>{ticket["title"]}</td>
                                     <td>{ticket["category"]}</td>
-                                    <td>{ticket["priority"]}</td>
-                                    <td>{ticket["technician_name"]}</td>
+                                    <td className={ticket["priority"]}>{ticket["priority"]}</td>
                                 </tr>
                             })}
                         </tbody>
