@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
 
-function Ticket({ticket, onEditClick, onDeleteClick}) {
+export default function Ticket({ticket, onEditClick, onDeleteClick}) {
     return (
         <tr key={ticket._id}>
-            <td>{ticket.status}</td>
+            <td style={{color: ticket.status === "Open" ? "green" : "red"}}>{ticket.status}</td>
             <td>{moment(ticket.date_created).format('M-D-YYYY h:mma')}</td>
             <td>{ticket.title}</td>
             <td>{ticket.customer}</td>
@@ -22,5 +22,3 @@ function Ticket({ticket, onEditClick, onDeleteClick}) {
         </tr>
     )
 }
-
-export default Ticket

@@ -8,6 +8,8 @@ router.get('/', function (req, res) {
     res.render('Hello World');
 });
 
+
+// Ticket Routes ------------------------
 router.get('/tickets', async function (req, res) {
     var tickets = await database.getAllTickets();
     res.send(tickets);
@@ -22,13 +24,25 @@ router.get('/ticket/:id', async (req,res) => {
 router.post('/ticket/:id', async (req,res) => {
     var id = req.params.id;
     console.log(id);
-    // res.send(ticket);
 })
 
 router.post('/create', function (req, res) {
     console.log(req.body.ticket);
-    createTicket(req.body.ticket);
+    database.createTicket(req.body.ticket);
 });
+
+router.get('/get-categories', async function (req, res) {
+    var categories = await database.getCategories();
+    res.send(categories);
+});
+
+router.get('/get-priorities', async function (req, res) {
+    var priorities = await database.getPriorities();
+    res.send(priorities);
+});
+
+
+// Dashboard Routes ------------------------
 
 router.get('/dashboard', async (req, res) => {
     var statistics = {};
@@ -56,6 +70,8 @@ router.get('/dashboard', async (req, res) => {
     res.send(statistics);
 });
 
+// User Routes ------------------------
+
 router.post('/login', (req,res) => {
     res.send({token: 'fluffy-bunny'})
 })
@@ -79,5 +95,11 @@ router.get('/technicians', async (req,res) => {
     var technicians = await database.getAllTechnicians();
     res.send(technicians);
 })
+
+router.post('/create-technician', async (req, res) => {
+    console.log(req.body.technician);
+    // database.createTechnician(req.body.technician);
+})
+
 
 module.exports = router;

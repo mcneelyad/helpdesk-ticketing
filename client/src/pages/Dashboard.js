@@ -3,6 +3,8 @@ import axios from 'axios';
 import moment from 'moment';
 import { Chart } from "react-google-charts";
 
+import OpenTickets from '../components/OpenTickets';
+
 import '../css/Dashboard.css';
 
 export default function Dashboard() {
@@ -10,7 +12,6 @@ export default function Dashboard() {
     const [openTickets, setOpenTickets] = useState([]);
     const [technicians, setTechnicians] = useState([]);
     const [ticketsByTech, setTicketsByTech] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:5000/dashboard")
@@ -24,8 +25,30 @@ export default function Dashboard() {
             });
     }, [])
 
-    const showModal = e => {
-        setIsModalOpen(true);
+    function createTechnician(evt) {
+        evt.preventDefault();
+        var person = prompt("Please enter the technician's name", "Harry Potter");
+
+        if (person === null) {
+            return;
+        }
+
+
+        var techName = person ? person.split(" ") : [];
+        if (techName[1].length === 1) {
+            techName[1] = "";
+        }
+        var technician = {
+            first_name: techName[0],
+            middle_name: techName[1],
+            last_name: techName[2],
+        }
+        
+        axios.post("http://localhost:5000/create-technician", {
+            technician: technician
+        }).then((res) => {
+            console.log(res.data);
+        });
     }
 
     return (
@@ -34,21 +57,18 @@ export default function Dashboard() {
             <div className="panels">
                 <div className="panel-techList">
                     <h3>Technician List</h3><br />
-                    <button onClick={(e) => this.showModal()}>Create a Technician</button>
+                    <button id="createTechnician" onClick={(e) => createTechnician(e)}>Create a Technician</button>
                     <hr />
                     <ul>
                         {technicians.map((tech) => {
                             return <li key={tech["_id"]}>
-                                {tech["first_name"] + " " + tech["middle_name"].charAt(0) + " " + tech["last_name"]}
+                                {tech["first_name"] + " " + tech["last_name"]}
                             </li>
                         })}
                     </ul>
                 </div>
                 <div className="panel-openTickets">
-                    <div>
-                        <h2>{openTickets.length}</h2>
-                        <h4>Open Tickets</h4>
-                    </div>
+                    <OpenTickets tickets={openTickets} />
                 </div>
                 <div className="panel-ticketsByTechnician">
                     <Chart
@@ -58,8 +78,8 @@ export default function Dashboard() {
                         loader={<div>Loading Chart</div>}
                         data={[
                             ['Technician', 'Open Tickets'],
-                            ['Alex D McNeely', 2],
-                            ['Jordan D Bolick (McNeely)', 1]
+                            ['Alex McNeely', 2],
+                            ['Jordan Bolick (McNeely)', 1]
                         ]}
                         options={{
                             title: 'Tickets By Technician',

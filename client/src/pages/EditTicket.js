@@ -7,17 +7,35 @@ export default function EditTicket(props) {
   const { id } = useParams();
 
   const [ticket, setTicket] = useState([]);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState('');
+  const [status, setStatus] = useState('');
+  const [category, setCategory] = useState('');
+  const [customer, setCustomer] = useState('');
+  const [customerContact, setCustomerContact] = useState('');
   const [technicians, setTechnicians] = useState([]);
   const [technicianNotes, setTechnicianNotes] = useState("");
   const [resolution, setResolution] = useState("");
-
-  let options = [];
+  const [categoryList, setCategoryList] = useState([]);
+  const [priorityList, setPriorityList] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/ticket/${id}`)
       .then(res => res.json())
       .then((data) => {
         setTicket(data[0]);
+        setTitle(data[0].title);
+        setDescription(data[0].description);
+        setPriority(data[0].priority);
+        setStatus(data[0].status);
+        setCategory(data[0].category);
+        setCustomer(data[0].customer);
+        setCustomerContact(data[0].customer_contact);
+
+        setTechnicianNotes(data[0].technician_notes);
+        setResolution(data[0].resolution);
+
         console.log(data[0]);
       });
   }, [id])
@@ -26,26 +44,18 @@ export default function EditTicket(props) {
     fetch('http://localhost:5000/technicians')
       .then(res => res.json())
       .then((data) => {
+        console.log(data);
         setTechnicians(data);
-      })
+      });
 
-  }, []);
-
-  for (let i = 0; i < technicians.length; i++) {
-    let techId = technicians[i]._id;
-    let techName = technicians[i].first_name + " " + technicians[i].last_name.charAt(0);
-
-    options.push({
-      value: techId,
-      label: techName
+    axios.get('http://localhost:5000/get-categories').then(res => {
+      setCategoryList(res.data);
     });
 
-  }
-
-  const handleSelectChange = (e) => {
-    // console.log('changed');
-    // console.log(e.target.value);
-  }
+    axios.get('http://localhost:5000/get-priorities').then(res => {
+      setPriorityList(res.data);
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,48 +85,57 @@ export default function EditTicket(props) {
 
   return (
     <div className="editTicket-page">
-      <h2 className="title">Edit Ticket #{ticket._id}</h2>
-      <div className="editTicket">
-        <p><b>Title:</b> {ticket.title}</p><br/>
-        <p><b>Submitted By:</b> {ticket.customer} ({ticket.customer_contact})</p><br />
-        <p><b>Description:</b> {ticket.description}</p>
-        <hr />
-        <form className="editTicket-form" onSubmit={handleSubmit}>
-          <p><b>Status:</b> {ticket.status}</p>
-          <div>Select technician: 
-            <select onChange={(e) => handleSelectChange(e)}>
-              {technicians.map(tech => {
-                return <option key={tech._id}>{tech.first_name} {tech.last_name}</option>
-              })}
-            </select>
-          </div>
-          <br />
-          <p>Technician Notes</p>
-          <textarea
-            name="technicianNotes"
-            id="technicianNotes"
-            cols="30"
-            rows="10"
-            defaultValue={ticket.technician_notes || ""}
-            onChange={(e) => {
-              setTechnicianNotes(e.target.value);
-              console.log(e.target.value);
-            }}>
-          </textarea><br /><br />
-          <p>Resolution</p>
-          <textarea
-            name="resolution"
-            id="resolution"
-            cols="30"
-            rows="10"
-            value={ticket.resolution || ""}
-            onChange={e => {
-              setResolution(e.target.value);
-              console.log(e.target.value);
-            }}>
-          </textarea>
-          <button type="submit">Save</button>
-        </form>
+      <div className="row">
+        <div className="column left">
+          <label className="form-label">Title</label><br />
+          <input type="text" value={title} className="form-input" disabled/>
+
+          <label className="form-label">Description</label><br />
+          <textarea value={description} className="form-input" disabled/>
+
+          <label className="form-label">Technician</label><br />
+          <select name="technician" id="technician" className="form-input">
+            {technicians.map(technician => {
+              return (
+                <option key={technician._id} value={technician._id}>{technician.first_name + " " + technician.last_name}</option>
+              )
+            })}
+          </select>
+
+          <label className="form-label">Technician Notes</label><br />
+          <textarea value={technicianNotes} rows="10" className="form-input" />
+        </div>
+        <div className="column right">
+          <label className="form-label">Status</label><br />
+          <select name="ticket-status" id="ticket-status" className="form-input">
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+          </select>
+
+          <label className="form-label">Priority</label><br />
+          <select name="ticket-priority" id="ticket-priority" className="form-input">
+            {!priority && <option value="" selected disabled>Select a priority</option>}
+            {priorityList.map((priority, i) => {
+              return <option key={i} value={priority.label}>{priority.label}</option>
+            })}
+          </select>
+
+          <label className="form-label">Category</label><br />
+          <select name="ticket-category" id="ticket-category" className="form-input">
+            {!category && <option value="">Select a category</option>}
+            {categoryList.map((category, i) => {
+              return <option key={i} value={category.label}>{category.label}</option>
+            })}
+          </select>
+
+          <hr />
+
+          <label className="form-label">Customer Name</label><br />
+          <input type="text" value={customer} className="form-input" />
+
+          <label className="form-label">Customer Contact</label><br />
+          <input type="text" value={customerContact} className="form-input" />
+        </div>
       </div>
     </div>
   );

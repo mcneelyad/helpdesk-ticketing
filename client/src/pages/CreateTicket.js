@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
 import axios from 'axios';
-
-import Navbar from '../components/Navbar';
 
 import '../css/CreateTicket.css';
 
@@ -14,8 +10,6 @@ export default function CreateTicket(props) {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [priority, setPriority] = useState('');
-
-  let history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
